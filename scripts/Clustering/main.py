@@ -336,6 +336,50 @@ def scatterplot_matrix_for_top_n_genes(n, data_genes_count, sorted_genes):
     plt.show()
 
 
+
+# --------------------------------------------------------------------------------
+# compute best nr of clusters
+# --------------------------------------------------------------------------------
+def cluster_number_comparison():
+    # determining the elbow point in the SSE curve to find best cluster number
+    sse = []
+    kmeans_kwargs = {
+        "init": "random",
+        "n_init": 10,
+        "max_iter": 300,
+        "random_state": 42,
+    }
+    scaler = StandardScaler()
+    scaled_features = scaler.fit_transform(data_genes_count, sorted_genes_list)
+    for k in range(2, 20):
+        kmeans = KMeans(n_clusters=k, **kmeans_kwargs)
+        kmeans.fit(scaled_features)
+        sse.append(kmeans.inertia_)
+
+    plt.plot(range(2, 20), sse)
+    plt.xticks(range(2, 20))
+    plt.xlabel("Number of Clusters")
+    plt.ylabel("SSE")
+    plt.show()
+
+    # A list holds the silhouette coefficients for each k
+    silhouette_coefficients = []
+
+    # Notice you start at 2 clusters for silhouette coefficient
+    for k in range(2, 20):
+         kmeans = KMeans(n_clusters=k, **kmeans_kwargs)
+         kmeans.fit(scaled_features)
+         score = silhouette_score(scaled_features, kmeans.labels_)
+         silhouette_coefficients.append(score)
+
+    plt.plot(range(2, 20), silhouette_coefficients)
+    plt.xticks(range(2, 20))
+    plt.xlabel("Number of Clusters")
+    plt.ylabel("Silhouette Coefficient")
+    plt.show()
+
+
+
 # --------------------------------------------------------------------------------
 def kmeans_own(nr_clusters, max_iter, tol, dimension, data):
     initial_centers = init_k_means(dimension=dimension, nr_clusters=nr_clusters, X=data)
@@ -355,16 +399,18 @@ dimension = 2
 nr_clusters = 3
 tol = 0.0001  # tolerance
 max_iter = 200  # maximum iterations
-kmeans_own(nr_clusters, max_iter, tol, dimension, data_2dim)
+#cluster_number_comparison()
+kmeans_own(nr_clusters, max_iter, tol, dimension, data_2dim) # init clustering
 #kmeans_library(nr_clusters, max_iter, tol, data_2dim)
 
 
 # gene distribution plot
-print(sorted_genes_list)
-gene_distribution_plot(N, data_genes_count, sorted_genes_list)
+#print(sorted_genes_list)
+#gene_distribution_plot(N, data_genes_count, sorted_genes_list)
 
 # prepare data for scatterplot matrix by adding label based on previous found age clusters
 #scatterplot_matrix_for_top_n_genes(N, data_genes_count, sorted_genes_list)
+
 
 
 print("clustering finished.")
