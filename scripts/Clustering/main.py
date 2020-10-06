@@ -64,7 +64,7 @@ def find_top_n(n, data, dim_list):
 
     list_size = len(dim_list)
     sum_list = []
-    for gene in range(3, list_size):
+    for gene in range(1, list_size):
         dim_name = str(dim_list[gene])
         dim_data = data[dim_name]
         sum = 0
@@ -406,7 +406,7 @@ kmeans_own(nr_clusters, max_iter, tol, dimension, data_2dim) # init clustering
 
 # gene distribution plot
 #print(sorted_genes_list)
-#gene_distribution_plot(N, data_genes_count, sorted_genes_list)
+gene_distribution_plot(N, data_genes_count, sorted_genes_list)
 
 # prepare data for scatterplot matrix by adding label based on previous found age clusters
 #scatterplot_matrix_for_top_n_genes(N, data_genes_count, sorted_genes_list)
