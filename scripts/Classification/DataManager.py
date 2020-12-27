@@ -24,7 +24,7 @@ class DataManager:
                     'FGFR3', 'PALB2', 'TEX13D', 'BCL6', 'APC', 'SVIL', 'ASXL2', 'ERBB3', 'MUTYH', 'TNFRSF14', 'OBSCN',
                     'RET', 'TNFAIP3', 'HMCN1', 'RICTOR', 'PCLO', 'FOXL2', 'ISM2', 'ABL1', 'CTNNB1', 'FGFR1', 'MPL', 'NF2',
                     'TSHR', 'ACVR1', 'MKI67', 'GRIN2A', 'JAK3']
-        self.data_frame = pd.read_csv("..\data\mutations_merged_filtered_and_processed.csv", usecols=dim_list, sep=';')
+        self.data_frame = pd.read_csv("..\data\mutations_merged_filtered_and_processed-cut.csv", usecols=dim_list, sep=';')
 
     def __set_age_groups_as_label(self):
         for i, row in self.data_frame.iterrows():
