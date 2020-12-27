@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 dim_list = ['Cancer Study', 'Age', 'Mutation_Count']
 
-data_frame = pd.read_csv("..\data\mutations_merged_filtered_and_processed.csv", sep=';') #usecols=dim_list,
+data_frame = pd.read_csv("..\data\mutations_merged_filtered_and_processed-cut.csv", sep=';') #usecols=dim_list,
 
 print('\n-----------------------')
 print('showing age distribution')
