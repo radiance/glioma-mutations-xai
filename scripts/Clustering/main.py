@@ -1,13 +1,16 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import seaborn as sns
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import silhouette_score
 
 
 # --------------------------------------------------------------------------------
 def init_data(n):
-    data = pd.read_csv("..\data\mutations_merged_filtered_and_processed.csv", delimiter=';')
+    data = pd.read_csv("..\data\mutations_merged_filtered_and_processed-cut.csv", delimiter=';')
 
     # define dimension list
     dim_list = ['Age', 'TP53', 'IDH1', 'ATRX', 'NF1', 'PIK3R2', 'TERT', 'KMT2A', 'ERBB2', 'ATR', 'BCORL1', 'FLG', 'PIK3CG', 'KDM6A',
@@ -257,6 +260,7 @@ def make_k_means_plots(X, K, centers, cumulative_distance, labels):
     plt.title('k-means algorithm')
     plt.xlabel('Age')
     plt.ylabel('Different Types of Mutated Genes')
+    plt.gca().xaxis.set_major_locator(plt.MultipleLocator(5))
     plt.show()
 
 
@@ -288,17 +292,17 @@ def gene_distribution_plot(n, data_genes_count, sorted_genes):
     plt.show()
 
     # plot gene distribution separately
-    for col in range(1, n+1):
-        x = data[0]
-        y = data[col]
-        label = sorted_genes[col-1][1]
-        plt.scatter(x, y, label=label, s=10)
-        plt.legend()
-
-        plt.title(label + ' Gene Distribution')
-        plt.xlabel('Age')
-        plt.ylabel('Mutation Count')
-        plt.show()
+    #for col in range(1, n+1):
+    #    x = data[0]
+    #    y = data[col]
+    #    label = sorted_genes[col-1][1]
+    #    plt.scatter(x, y, label=label, s=10)
+    #    plt.legend()
+    #
+    #    plt.title(label + ' Gene Distribution')
+    #    plt.xlabel('Age')
+    #    plt.ylabel('Mutation Count')
+    #    plt.show()
 
 
 # --------------------------------------------------------------------------------
@@ -398,8 +402,8 @@ data_2dim, sorted_genes_list, data_genes_count = init_data(N)
 dimension = 2
 nr_clusters = 3
 tol = 0.0001  # tolerance
-max_iter = 200  # maximum iterations
-#cluster_number_comparison()
+max_iter = 500  # maximum iterations
+cluster_number_comparison()
 kmeans_own(nr_clusters, max_iter, tol, dimension, data_2dim) # init clustering
 #kmeans_library(nr_clusters, max_iter, tol, data_2dim)
 
