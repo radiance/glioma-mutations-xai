@@ -6,6 +6,7 @@
 # -----------------------------------------------------------
 
 import pandas as pd
+import os
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -67,8 +68,8 @@ def _find_top_n(n, data, dim_list):
 # =============== render plots =============== #
 
 #importantgenes = ["TP53", "IDH1", "ATRX", "H3F3A", "AHNAK2", "SOX1", "SUSD2", "PIK3CA", "TERT", "RYR2", "KMT2A", "KMT2D"] # important genes
-data_frame = pd.read_csv("C:\\Dev\\XAI\\xai-glioma-mutations\\data\\mutations_merged_filtered_and_processed-cut.csv", sep=';')
-data_frame_only_genes = pd.read_csv("C:\\Dev\\XAI\\xai-glioma-mutations\\data\\mutations_merged_filtered_and_processed-cut.csv", sep=';', usecols=range(5,len(data_frame.columns))) # genes begin in column 6, first 5 columns are sampleids, age, mutation_count etc.
+data_frame = pd.read_csv(os.path.join(os.path.dirname(__file__), "..\..\data\mutations_merged_filtered_and_processed-cut.csv"), sep=';')
+data_frame_only_genes = pd.read_csv(os.path.join(os.path.dirname(__file__), "..\..\data\mutations_merged_filtered_and_processed-cut.csv"), sep=';', usecols=range(5,len(data_frame.columns))) # genes begin in column 6, first 5 columns are sampleids, age, mutation_count etc.
 
 print_age_distribution(data_frame)
 #print_mutation_count(data_frame)
