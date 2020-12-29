@@ -68,9 +68,9 @@ def _find_top_n(n, data, dim_list):
 
 #importantgenes = ["TP53", "IDH1", "ATRX", "H3F3A", "AHNAK2", "SOX1", "SUSD2", "PIK3CA", "TERT", "RYR2", "KMT2A", "KMT2D"] # important genes
 data_frame = pd.read_csv("C:\\Dev\\XAI\\xai-glioma-mutations\\data\\mutations_merged_filtered_and_processed-cut.csv", sep=';')
-data_frame_only_genes = pd.read_csv("C:\\Dev\\XAI\\xai-glioma-mutations\\data\\mutations_merged_filtered_and_processed-cut.csv", sep=';', usecols=range(6,len(data_frame.columns))) # genes begin in column 7, first 6 columns are sampleids, age, mutation_count etc.
+data_frame_only_genes = pd.read_csv("C:\\Dev\\XAI\\xai-glioma-mutations\\data\\mutations_merged_filtered_and_processed-cut.csv", sep=';', usecols=range(5,len(data_frame.columns))) # genes begin in column 6, first 5 columns are sampleids, age, mutation_count etc.
 
-#print_age_distribution(data_frame)
+print_age_distribution(data_frame)
 #print_mutation_count(data_frame)
 #print_samples_per_study(data_frame)
-print_top_n_genes(data_frame_only_genes, 20)
+print_top_n_genes(data_frame_only_genes, 87) # min 1, max 87 (only 87 out of 140 selected via pedcbioportal left in csv)
