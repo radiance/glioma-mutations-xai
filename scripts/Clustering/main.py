@@ -35,7 +35,7 @@ def init_data(n):
     sorted_genes_list = find_top_n(n, data, dim_list)
     data_top_genes = []
     data_top_genes.append(age)
-    for i in range(0, 10):
+    for i in range(0, n):
         data_top_genes.append(data[sorted_genes_list[i][1]])
 
     # count genes per age and create array
